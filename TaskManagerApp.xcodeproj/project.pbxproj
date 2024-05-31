@@ -14,6 +14,7 @@
 		A06A2E142C09558600FB2F52 /* TaskManagerAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E132C09558600FB2F52 /* TaskManagerAppTests.swift */; };
 		A06A2E1E2C09558600FB2F52 /* TaskManagerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */; };
 		A06A2E202C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */; };
+		A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E2C2C095A4900FB2F52 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		A06A2E192C09558600FB2F52 /* TaskManagerAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaskManagerAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITests.swift; sourceTree = "<group>"; };
 		A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A06A2E2C2C095A4900FB2F52 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
+				A06A2E2C2C095A4900FB2F52 /* LoginView.swift */,
 				A06A2E042C09558600FB2F52 /* ContentView.swift */,
 				A06A2E062C09558600FB2F52 /* Assets.xcassets */,
 				A06A2E082C09558600FB2F52 /* Preview Content */,
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */,
 				A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
 			);

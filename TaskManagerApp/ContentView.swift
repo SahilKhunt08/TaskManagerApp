@@ -13,12 +13,23 @@ struct ContentView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Welcome to the Home Page!")
+                .font(.largeTitle)
+                .padding()
         }
         .padding()
+        .navigationBarBackButtonHidden(true)  // Hide the back button
+
     }
 }
 
 #Preview {
     ContentView()
 }
+
+
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ContentView()
+//    }
+//}
