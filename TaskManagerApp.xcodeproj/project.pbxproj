@@ -15,6 +15,8 @@
 		A06A2E1E2C09558600FB2F52 /* TaskManagerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */; };
 		A06A2E202C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */; };
 		A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E2C2C095A4900FB2F52 /* LoginView.swift */; };
+		A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */; };
+		A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITests.swift; sourceTree = "<group>"; };
 		A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A06A2E2C2C095A4900FB2F52 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
+				A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */,
 				A06A2E2C2C095A4900FB2F52 /* LoginView.swift */,
 				A06A2E042C09558600FB2F52 /* ContentView.swift */,
 				A06A2E062C09558600FB2F52 /* Assets.xcassets */,
@@ -109,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				A06A2E092C09558600FB2F52 /* Preview Assets.xcassets */,
+				A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -235,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A06A2E0A2C09558600FB2F52 /* Preview Assets.xcassets in Resources */,
+				A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */,
 				A06A2E072C09558600FB2F52 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */,
 				A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */,
 				A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,

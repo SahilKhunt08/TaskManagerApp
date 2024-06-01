@@ -12,38 +12,102 @@ struct LoginView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isLoggedIn: Bool = false
-    
+    @State private var selection: Int = 0
+
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Username", text: $username)
+                Text("Log in")
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.bottom, 40)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+
+                Text("Email Address")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                TextField("Enter email here", text: $username)
+                    .autocapitalization(.none)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                SecureField("Password", text: $password)
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+                    .cornerRadius(/*@START_MENU_TOKEN@*/100.0/*@END_MENU_TOKEN@*/)
+
+                Text("Password")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                SecureField("Enter password here", text: $password)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
+                    .padding(.horizontal)
+                    .padding(.bottom, 20)
+
+                HStack {
+                    Spacer()
+                    Button("Forgot password?") {
+                        // Action for forgot password
+                    }
+//                    .font(.footnote)
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+                }
+
                 NavigationLink(destination: ContentView(), isActive: $isLoggedIn) {
                     EmptyView()
                 }
-                
+
                 Button(action: {
                     // Replace with your actual login logic
                     if username == "user" && password == "password" {
                         isLoggedIn = true
                     }
                 }) {
-                    Text("Login")
+                    Text("Log in")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.black)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 20)
+
+                Text("Or Login with")
+                    .padding(.top, 20)
+                    .padding(.bottom, 10)
+
+                HStack(spacing: 20) {
+                    Button(action: {
+                        // Action for Apple login
+                    }) {
+                        Image("AppleIcon")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                            .aspectRatio(contentMode: .fit)
+                    }
+
+                    Button(action: {
+                        // Action for Google login
+                    }) {
+                        Image("GoogleIcon")
+                            .resizable()
+                            .frame(width: 50, height: 50)
+                    }
+                }
+                .padding(.top, 20)
+
+//                Spacer()
+
+                HStack {
+                    Text("Don’t have an account?")
+                    Button("Sign up") {
+                        selection = 1
+                    }
+                }
+                .padding(.bottom, 20)
             }
-            .navigationTitle("Login")
+            .navigationTitle("")
+            .navigationBarHidden(true)
         }
     }
 }
