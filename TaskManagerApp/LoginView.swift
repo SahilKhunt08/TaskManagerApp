@@ -30,7 +30,7 @@ struct LoginView: View {
                 
                 Button(action: {
                     // Replace with your actual login logic
-                    if username == "user" && password == "password" {
+                    if username == "User" && password == "Password" {
                         isLoggedIn = true
                     }
                 }) {
