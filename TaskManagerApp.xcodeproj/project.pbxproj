@@ -11,7 +11,6 @@
 		A04F0FBD2C0BD446007E7DF6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBC2C0BD446007E7DF6 /* FirebaseAnalytics */; };
 		A04F0FBF2C0BD446007E7DF6 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBE2C0BD446007E7DF6 /* FirebaseAnalyticsSwift */; };
 		A04F0FC12C0BD446007E7DF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FC02C0BD446007E7DF6 /* FirebaseAuth */; };
-		A04F0FC32C0BD446007E7DF6 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FC22C0BD446007E7DF6 /* FirebaseAuthCombine-Community */; };
 		A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */; };
 		A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E042C09558600FB2F52 /* ContentView.swift */; };
 		A06A2E072C09558600FB2F52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A06A2E062C09558600FB2F52 /* Assets.xcassets */; };
@@ -20,6 +19,11 @@
 		A06A2E1E2C09558600FB2F52 /* TaskManagerAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */; };
 		A06A2E202C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */; };
 		A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A2E2C2C095A4900FB2F52 /* LoginView.swift */; };
+		A0753E3C2C0D1A0D005B9FF3 /* AuthenticationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E3B2C0D1A0D005B9FF3 /* AuthenticationView.swift */; };
+		A0753E3E2C0D1BCE005B9FF3 /* SignInEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E3D2C0D1BCE005B9FF3 /* SignInEmailView.swift */; };
+		A0753E402C0D1EDB005B9FF3 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E3F2C0D1EDB005B9FF3 /* AuthenticationManager.swift */; };
+		A0753E422C0D257E005B9FF3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E412C0D257E005B9FF3 /* RootView.swift */; };
+		A0753E442C0D291A005B9FF3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E432C0D291A005B9FF3 /* SettingsView.swift */; };
 		A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */; };
 		A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */; };
 /* End PBXBuildFile section */
@@ -54,6 +58,11 @@
 		A06A2E1D2C09558600FB2F52 /* TaskManagerAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITests.swift; sourceTree = "<group>"; };
 		A06A2E1F2C09558600FB2F52 /* TaskManagerAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A06A2E2C2C095A4900FB2F52 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A0753E3B2C0D1A0D005B9FF3 /* AuthenticationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationView.swift; sourceTree = "<group>"; };
+		A0753E3D2C0D1BCE005B9FF3 /* SignInEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInEmailView.swift; sourceTree = "<group>"; };
+		A0753E3F2C0D1EDB005B9FF3 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		A0753E412C0D257E005B9FF3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		A0753E432C0D291A005B9FF3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +75,6 @@
 				A04F0FBF2C0BD446007E7DF6 /* FirebaseAnalyticsSwift in Frameworks */,
 				A04F0FC12C0BD446007E7DF6 /* FirebaseAuth in Frameworks */,
 				A04F0FBD2C0BD446007E7DF6 /* FirebaseAnalytics in Frameworks */,
-				A04F0FC32C0BD446007E7DF6 /* FirebaseAuthCombine-Community in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,9 +119,10 @@
 			isa = PBXGroup;
 			children = (
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
+				A06A2E042C09558600FB2F52 /* ContentView.swift */,
+				A0753E3A2C0D19E8005B9FF3 /* Authentication */,
 				A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */,
 				A06A2E2C2C095A4900FB2F52 /* LoginView.swift */,
-				A06A2E042C09558600FB2F52 /* ContentView.swift */,
 				A06A2E062C09558600FB2F52 /* Assets.xcassets */,
 				A04F0FB92C0B8DA3007E7DF6 /* GoogleService-Info.plist */,
 				A06A2E082C09558600FB2F52 /* Preview Content */,
@@ -147,6 +156,18 @@
 			path = TaskManagerAppUITests;
 			sourceTree = "<group>";
 		};
+		A0753E3A2C0D19E8005B9FF3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				A0753E3B2C0D1A0D005B9FF3 /* AuthenticationView.swift */,
+				A0753E3D2C0D1BCE005B9FF3 /* SignInEmailView.swift */,
+				A0753E3F2C0D1EDB005B9FF3 /* AuthenticationManager.swift */,
+				A0753E412C0D257E005B9FF3 /* RootView.swift */,
+				A0753E432C0D291A005B9FF3 /* SettingsView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -167,7 +188,6 @@
 				A04F0FBC2C0BD446007E7DF6 /* FirebaseAnalytics */,
 				A04F0FBE2C0BD446007E7DF6 /* FirebaseAnalyticsSwift */,
 				A04F0FC02C0BD446007E7DF6 /* FirebaseAuth */,
-				A04F0FC22C0BD446007E7DF6 /* FirebaseAuthCombine-Community */,
 			);
 			productName = TaskManagerApp;
 			productReference = A06A2DFF2C09558600FB2F52 /* TaskManagerApp.app */;
@@ -288,10 +308,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0753E422C0D257E005B9FF3 /* RootView.swift in Sources */,
 				A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */,
+				A0753E3E2C0D1BCE005B9FF3 /* SignInEmailView.swift in Sources */,
+				A0753E442C0D291A005B9FF3 /* SettingsView.swift in Sources */,
+				A0753E402C0D1EDB005B9FF3 /* AuthenticationManager.swift in Sources */,
 				A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */,
 				A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
+				A0753E3C2C0D1A0D005B9FF3 /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,11 +669,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A04F0FBB2C0BCCED007E7DF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
-		};
-		A04F0FC22C0BD446007E7DF6 /* FirebaseAuthCombine-Community */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A04F0FBB2C0BCCED007E7DF6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = "FirebaseAuthCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
