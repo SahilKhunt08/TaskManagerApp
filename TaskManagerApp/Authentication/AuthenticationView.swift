@@ -25,7 +25,7 @@ struct AuthenticationView: View {
             }
         }
         .padding()
-        .navigationTitle("Second Sign in")
+        .navigationTitle("Initial Page")
     }
 }
 
