@@ -52,7 +52,7 @@
 //                    .foregroundColor(.black)
 //                }
 //
-//                NavigationLink(destination: ContentView(), isActive: $isLoggedIn) {
+//                //NavigationLink(destination: ContentView(), isActive: $isLoggedIn) {
 //                    EmptyView()
 //                }
 //
