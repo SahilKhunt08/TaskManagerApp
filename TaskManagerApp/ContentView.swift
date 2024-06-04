@@ -16,9 +16,9 @@ struct ContentView: View {
                     
                     HStack {
                         
-                        NavigationLink(destination: SettingsView(), isActive: $settingsButtonPressed) {
-                            EmptyView()
-                        }.toolbarRole(.editor)
+//                        NavigationLink(destination: SettingsView(), isActive: $settingsButtonPressed) {
+//                            EmptyView()
+//                        }.toolbarRole(.editor)
                         Button(action: {
                             settingsButtonPressed = true
                         }, label: {
@@ -29,12 +29,9 @@ struct ContentView: View {
                                 .font(.system(size: 27))
                                 .frame(width: 35, height: 35)
                         })
-                        
+//                        
                         Spacer()
-                        
-//                        NavigationLink(destination: NewListView(), isActive: $newListButtonPressed) {
-//                            EmptyView()
-//                        }
+                    
                         Button(action: {
                             newListButtonPressed = true
                         }, label: {

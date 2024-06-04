@@ -15,20 +15,38 @@ struct NewListView: View {
     
     var body: some View {
         VStack{
+            Spacer()
+
             Text("📋 List Creator")
                 .font(.system(size: 35))
                 .bold()
-            
+
             Form {
+                
                 Text("1️⃣ Set a Name ")
-                    .font(.system(size: 17))
+                    .font(.system(size: 20))
                     .bold()
                 TextField("List Name", text: $listName)
                 Text("2️⃣ Format the List ")
-                    .font(.system(size: 17))
+                    .font(.system(size: 20))
                     .bold()
                 TextField("Title", text: $listContent,  axis: .vertical)
-                    .lineLimit(10...20)
+                    .lineLimit(20...50)
+                
+                Button(action: {
+                    
+                }) {
+                   
+                    Text("Submit")
+                        .font(.system(size: 20))
+                        .padding(.horizontal, 50)
+                }
+                
+                .buttonStyle(.borderedProminent)
+                .tint(Color("Color 1"))
+                .frame(maxWidth: .infinity)
+              
+
             }
             
         }
