@@ -70,6 +70,7 @@
 		A0B7ADAA2C0D5F9200D7DEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
+		A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskManagerApp.entitlements; sourceTree = "<group>"; };
 		A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +128,7 @@
 		A06A2E012C09558600FB2F52 /* TaskManagerApp */ = {
 			isa = PBXGroup;
 			children = (
+				A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */,
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
 				A06A2E042C09558600FB2F52 /* ContentView.swift */,
 				A0B7ADAB2C0D61F700D7DEAE /* Utilities */,
@@ -502,6 +504,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TaskManagerApp/TaskManagerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskManagerApp/Preview Content\"";
@@ -532,6 +535,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TaskManagerApp/TaskManagerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TaskManagerApp/Preview Content\"";
