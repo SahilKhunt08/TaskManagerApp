@@ -62,8 +62,9 @@ struct SettingsView: View {
                 emailSection
             }
         }
-        onAppear() {
+        .onAppear() {
             viewModel.loadAuthProviders()
+            print("Hello")
         }
         .navigationTitle("Settings")
     }
