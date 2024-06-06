@@ -28,6 +28,7 @@
 		A0B7ADA92C0D5F5600D7DEAE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0B7ADA82C0D5F5600D7DEAE /* GoogleSignInSwift */; };
 		A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */; };
 		A0B7ADAF2C0D6B3900D7DEAE /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */; };
+		A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */; };
 		A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */; };
 		A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
 		A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskManagerApp.entitlements; sourceTree = "<group>"; };
+		A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleHelper.swift; sourceTree = "<group>"; };
 		A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -178,6 +180,7 @@
 				A0753E412C0D257E005B9FF3 /* RootView.swift */,
 				A0753E432C0D291A005B9FF3 /* SettingsView.swift */,
 				A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */,
+				A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */,
 				A0B7ADAF2C0D6B3900D7DEAE /* SignInGoogleHelper.swift in Sources */,
 				A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */,
+				A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
 				A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */,
 				A0753E3C2C0D1A0D005B9FF3 /* AuthenticationView.swift in Sources */,
