@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var newListButtonPressed: Bool = false
+    @State private var newListModalOpen  = false
     @State private var settingsButtonPressed: Bool = false
 
     var body: some View {
@@ -19,25 +19,21 @@ struct ContentView: View {
 //                        NavigationLink(destination: SettingsView(), isActive: $settingsButtonPressed) {
 //                            EmptyView()
 //                        }.toolbarRole(.editor)
-                        
-                        Button(action: {
-                            settingsButtonPressed = true
-                        }, label: {
-                            Image(systemName: "gearshape.fill")
-                                .resizable()
-                                .imageScale(.large)
-                                .foregroundStyle(.tint)
-                                .font(.system(size: 27))
-                                .frame(width: 35, height: 35)
-                        })
-                        
+//                        Button(action: {
+//                            settingsButtonPressed = true
+//                        }, label: {
+//                            Image(systemName: "gearshape.fill")
+//                                .resizable()
+//                                .imageScale(.large)
+//                                .foregroundStyle(.tint)
+//                                .font(.system(size: 27))
+//                                .frame(width: 35, height: 35)
+//                        })
+//                        
                         Spacer()
-                        
-//                        NavigationLink(destination: NewListView(), isActive: $newListButtonPressed) {
-//                            EmptyView()
-//                        }
+                    
                         Button(action: {
-                            newListButtonPressed = true
+                            newListModalOpen = true
                         }, label: {
                             Image(systemName: "pencil")
                                 .resizable()
@@ -46,8 +42,8 @@ struct ContentView: View {
                                 .font(.system(size: 20))
                                 .frame(width: 30, height: 30)
                                 .bold()
-                        }).sheet(isPresented: $newListButtonPressed, content: {
-                            NewListView()
+                        }).sheet(isPresented: $newListModalOpen, content: {
+                            NewListView(newListModalOpen: $newListModalOpen)
                         })
                         
                         

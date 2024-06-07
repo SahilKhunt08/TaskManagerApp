@@ -9,6 +9,8 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
+
 
 @main
 struct TaskManagerAppApp: App {
@@ -17,8 +19,8 @@ struct TaskManagerAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
-            
+//            RootView()
+            ContentView()
 //            LoginView()
             
 //            NavigationStack {
