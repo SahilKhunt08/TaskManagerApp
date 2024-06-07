@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F3795E92C0CF7180053C1C8 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3795E82C0CF7180053C1C8 /* NewListView.swift */; };
 		6FE148DB2C1182CF003DCA4C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FE148DA2C1182CF003DCA4C /* FirebaseFirestoreSwift */; };
 		A04F0FBD2C0BD446007E7DF6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBC2C0BD446007E7DF6 /* FirebaseAnalytics */; };
 		A04F0FBF2C0BD446007E7DF6 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBE2C0BD446007E7DF6 /* FirebaseAnalyticsSwift */; };
@@ -25,6 +24,7 @@
 		A0753E402C0D1EDB005B9FF3 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E3F2C0D1EDB005B9FF3 /* AuthenticationManager.swift */; };
 		A0753E422C0D257E005B9FF3 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E412C0D257E005B9FF3 /* RootView.swift */; };
 		A0753E442C0D291A005B9FF3 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0753E432C0D291A005B9FF3 /* SettingsView.swift */; };
+		A0A3A5AF2C1389C600B0D0A1 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A3A5AE2C1389C600B0D0A1 /* NewListView.swift */; };
 		A0B7ADA42C0D5E2600D7DEAE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0B7ADA32C0D5E2600D7DEAE /* GoogleService-Info.plist */; };
 		A0B7ADA72C0D5F5600D7DEAE /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = A0B7ADA62C0D5F5600D7DEAE /* GoogleSignIn */; };
 		A0B7ADA92C0D5F5600D7DEAE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0B7ADA82C0D5F5600D7DEAE /* GoogleSignInSwift */; };
@@ -53,7 +53,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6F3795E82C0CF7180053C1C8 /* NewListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		A06A2DFF2C09558600FB2F52 /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppApp.swift; sourceTree = "<group>"; };
 		A06A2E042C09558600FB2F52 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +69,7 @@
 		A0753E3F2C0D1EDB005B9FF3 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		A0753E412C0D257E005B9FF3 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		A0753E432C0D291A005B9FF3 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A0A3A5AE2C1389C600B0D0A1 /* NewListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewListView.swift; path = ../../../Downloads/NewListView.swift; sourceTree = "<group>"; };
 		A0B7ADA32C0D5E2600D7DEAE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A0B7ADAA2C0D5F9200D7DEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -145,6 +145,7 @@
 				A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */,
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
 				A06A2E042C09558600FB2F52 /* ContentView.swift */,
+				A0A3A5AE2C1389C600B0D0A1 /* NewListView.swift */,
 				A0B7ADAB2C0D61F700D7DEAE /* Utilities */,
 				A0753E3A2C0D19E8005B9FF3 /* Authentication */,
 				A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */,
@@ -360,6 +361,7 @@
 				A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
 				A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */,
+				A0A3A5AF2C1389C600B0D0A1 /* NewListView.swift in Sources */,
 				A0753E3C2C0D1A0D005B9FF3 /* AuthenticationView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
