@@ -16,7 +16,7 @@ struct NewListView: View {
     @State var listContent = ""
     @Binding var newListModalOpen: Bool
     let db = Firestore.firestore()
-    
+
     
     let userData: [String: Any] = [
                "firstName": "John",
@@ -48,8 +48,18 @@ struct NewListView: View {
                 
                 Button(action: {
                     newListModalOpen = false
-                    db.collection("lists").addDocument(data: userData)
-                        
+                    let ref = db.collection("lists").document()
+                    ref.setData([
+                        "id": ref.documentID,
+                        "name": listName,
+                        "content": listContent
+                    ]) { error in
+                        if let error = error {
+                               print("Error adding document: \(error)")
+                           } else {
+                               print("Document successfully added with ID: \(ref.documentID)")
+                           }
+                    }
                 }) {
                    
                     Text("Submit")

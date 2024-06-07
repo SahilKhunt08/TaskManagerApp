@@ -9,6 +9,8 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import FirebaseCore
+import FirebaseFirestore
+
 
 @main
 struct TaskManagerAppApp: App {
