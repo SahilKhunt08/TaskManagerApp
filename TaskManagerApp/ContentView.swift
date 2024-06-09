@@ -2,6 +2,12 @@
 //  Swipable Components
 //
 
+
+
+//test email details
+//email: vtest1@gmail.com
+//password: viddyp
+
 import SwiftUI
 
 struct ContentView: View {

@@ -19,8 +19,8 @@ struct TaskManagerAppApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            RootView()
-            ContentView()
+            RootView()
+//            ContentView()
 //            LoginView()
             
 //            NavigationStack {
