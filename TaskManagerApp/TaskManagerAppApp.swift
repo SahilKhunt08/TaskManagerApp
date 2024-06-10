@@ -20,13 +20,6 @@ struct TaskManagerAppApp: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-//            ContentView()
-//            LoginView()
-            
-//            NavigationStack {
-//                AuthenticationView()
-//            }
-            
         }
     }
 }

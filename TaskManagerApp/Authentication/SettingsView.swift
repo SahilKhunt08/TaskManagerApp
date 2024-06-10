@@ -9,7 +9,6 @@ import SwiftUI
 
 @MainActor
 final class SettingsViewModel: ObservableObject {
-    
     @Published var authProviders: [AuthProviderOption] = []
     
     func loadAuthProviders() {
@@ -33,7 +32,7 @@ final class SettingsViewModel: ObservableObject {
     
     func updateEmail() async throws {
         let email = "hello123@gmail.com" //Temp email. Make sure to retrieve the current email being used
-        try await AuthenticationManager.shared.updateEmil(email: email)
+        try await AuthenticationManager.shared.updateEmail(email: email)
     }
     
     func updatePassword() async throws {
@@ -43,9 +42,9 @@ final class SettingsViewModel: ObservableObject {
 }
 
 struct SettingsView: View {
-    
     @StateObject private var viewModel = SettingsViewModel()
     @Binding var showSignInView: Bool
+    
     var body: some View {
         List {
             Button("Log out") {
@@ -53,11 +52,14 @@ struct SettingsView: View {
                     do {
                         try viewModel.signOut()
                         showSignInView = true
+                        print("Signed Out")
                     } catch {
+                        print("Couldn't sign out")
                         print(error) // Change for future
                     }
                 }
             }
+            
             if(viewModel.authProviders.contains(.email)) {
                 emailSection
             }
@@ -68,25 +70,14 @@ struct SettingsView: View {
         }
         .navigationTitle("Settings")
     }
-}
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            SettingsView(showSignInView: .constant(false))
-        }
-    }
-}
-
-extension SettingsView {
-    
     private var emailSection: some View {
         Section {
             Button("Reset password") {
                 Task {
                     do {
                         try await viewModel.resetPassword()
-                        print("PASSWORD RESET!") //Put some sort of alert on the screen for the future
+                        print("PASSWORD RESET!") // Put some sort of alert on the screen for the future
                     } catch {
                         print(error) // Change for future
                     }
@@ -96,7 +87,7 @@ extension SettingsView {
                 Task {
                     do {
                         try await viewModel.updatePassword()
-                        print("PASSWORD UPDATED!") //Put some sort of alert on the screen for the future
+                        print("PASSWORD UPDATED!") // Put some sort of alert on the screen for the future
                     } catch {
                         print(error) // Change for future
                     }
@@ -106,7 +97,7 @@ extension SettingsView {
                 Task {
                     do {
                         try await viewModel.updateEmail()
-                        print("EMAIL UPDATED!") //Put some sort of alert on the screen for the future
+                        print("EMAIL UPDATED!") // Put some sort of alert on the screen for the future
                     } catch {
                         print(error) // Change for future
                     }
@@ -116,7 +107,15 @@ extension SettingsView {
             Text("Email Functions")
         }
     }
-    
+}
+
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationStack {
+            SettingsView(showSignInView: .constant(false))
+        }
+    }
 }
 
 

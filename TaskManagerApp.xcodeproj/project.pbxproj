@@ -33,6 +33,7 @@
 		A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */; };
 		A0EB93AD2C0A492300AE32F9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */; };
 		A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */; };
+		A0F26D622C16806C0001B104 /* TempWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F26D612C16806C0001B104 /* TempWork.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleHelper.swift; sourceTree = "<group>"; };
 		A0EB93AC2C0A492300AE32F9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
+		A0F26D612C16806C0001B104 /* TempWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempWork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				A0B7ADA32C0D5E2600D7DEAE /* GoogleService-Info.plist */,
 				A06A2E062C09558600FB2F52 /* Assets.xcassets */,
 				A06A2E082C09558600FB2F52 /* Preview Content */,
+				A0F26D612C16806C0001B104 /* TempWork.swift */,
 			);
 			path = TaskManagerApp;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				A06A2E2D2C095A4900FB2F52 /* LoginView.swift in Sources */,
 				A0B7ADAF2C0D6B3900D7DEAE /* SignInGoogleHelper.swift in Sources */,
 				A06A2E052C09558600FB2F52 /* ContentView.swift in Sources */,
+				A0F26D622C16806C0001B104 /* TempWork.swift in Sources */,
 				A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */,
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
 				A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */,

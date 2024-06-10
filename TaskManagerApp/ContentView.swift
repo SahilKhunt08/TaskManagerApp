@@ -1,104 +1,77 @@
-// To Do
-//  Swipable Components
+
 //
-
-
-
-//test email details
-//email: vtest1@gmail.com
-//password: viddyp
+//  RootView.swift
+//  TaskManagerApp
+//
+//  Created by Sahil Khunt on 6/2/24.
+//
+//  test email details
+//  email: vtest1@gmail.com
+//  password: viddyp
+//
 
 import SwiftUI
 
 struct ContentView: View {
-    @State private var newListModalOpen  = false
-    @State private var settingsButtonPressed: Bool = false
+    @State private var newListModalOpen = false
+    @Binding var showSignInView: Bool
 
     var body: some View {
         NavigationView {
-            ZStack(alignment: .leading) {
-                
-                VStack(alignment: .leading) {
-                    
-                    HStack {
-                        
-//                        NavigationLink(destination: SettingsView(), isActive: $settingsButtonPressed) {
-//                            EmptyView()
-//                        }.toolbarRole(.editor)
-//                        Button(action: {
-//                            settingsButtonPressed = true
-//                        }, label: {
-//                            Image(systemName: "gearshape.fill")
-//                                .resizable()
-//                                .imageScale(.large)
-//                                .foregroundStyle(.tint)
-//                                .font(.system(size: 27))
-//                                .frame(width: 35, height: 35)
-//                        })
-//                        
-                        Spacer()
-                    
-                        Button(action: {
-                            newListModalOpen = true
-                        }, label: {
-                            Image(systemName: "pencil")
-                                .resizable()
-                                .imageScale(.medium)
-                                .foregroundStyle(.tint)
-                                .font(.system(size: 20))
-                                .frame(width: 30, height: 30)
-                                .bold()
-                        }).sheet(isPresented: $newListModalOpen, content: {
-                            NewListView(newListModalOpen: $newListModalOpen)
-                        })
-                        
-                        
-                    }.frame(maxWidth: .infinity, alignment: .trailing)
-                    
-                    VStack {
-                        Text("List Name")
-                            .bold()
-                            .font(.largeTitle)
-                            .frame(alignment: .leading)
-                    }
-                    
-                    VStack {
-                        
-                        HStack { //Temp...will change
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundStyle(.tint)
-                                .frame(width: 35, height: 35)
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundStyle(.tint)
-                                .frame(width: 35, height: 35)
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundStyle(.tint)
-                                .frame(width: 35, height: 35)
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundStyle(.tint)
-                                .frame(width: 35, height: 35)
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .foregroundStyle(.tint)
-                                .frame(width: 35, height: 35)
-                        }
+            VStack(alignment: .leading) {
+                HStack {
+                    // NavigationLink for SettingsView
+                    NavigationLink(destination: SettingsView(showSignInView: .constant(false))) {
+                        Image(systemName: "gearshape.fill")
+                            .resizable()
+                            .imageScale(.large)
+                            .foregroundStyle(.tint)
+                            .font(.system(size: 27))
+                            .frame(width: 35, height: 35)
                     }
                     
                     Spacer()
-                    
+
+                    Button(action: {
+                        newListModalOpen = true
+                    }, label: {
+                        Image(systemName: "pencil")
+                            .resizable()
+                            .imageScale(.medium)
+                            .foregroundStyle(.tint)
+                            .font(.system(size: 20))
+                            .frame(width: 30, height: 30)
+                            .bold()
+                    }).sheet(isPresented: $newListModalOpen, content: {
+                        NewListView(newListModalOpen: $newListModalOpen)
+                    })
                 }
-                
+                .frame(maxWidth: .infinity, alignment: .trailing)
+
+                Text("List Name")
+                    .bold()
+                    .font(.largeTitle)
+                    .frame(alignment: .leading)
+
+                HStack { // Temp...will change
+                    ForEach(0..<5) { _ in
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .foregroundStyle(.tint)
+                            .frame(width: 35, height: 35)
+                    }
+                }
+
+                Spacer()
             }
             .padding()
-           
-        }.toolbar(.hidden)
+        }
+        .toolbar(.hidden)
     }
 }
 
-#Preview {
-    ContentView()
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView(showSignInView: .constant(false))
+    }
 }

@@ -33,7 +33,7 @@ final class AuthenticationManager {
     
     func getAuthenticatedUser() throws -> AuthDataResultModel {
         guard let user = Auth.auth().currentUser else {
-            throw URLError(.badServerResponse) //Improve this error message for the future
+            throw URLError(.badServerResponse) // Improve this error message for the future
         }
         
         return AuthDataResultModel(user: user)
@@ -61,7 +61,6 @@ final class AuthenticationManager {
     }
 }
 
-
 // MARK: SIGN IN EMAIL
 
 extension AuthenticationManager {
@@ -83,19 +82,19 @@ extension AuthenticationManager {
     
     func updatePassword(password: String) async throws {
         guard let user = Auth.auth().currentUser else {
-            throw URLError(.badServerResponse) //Put custom error for future
+            throw URLError(.badServerResponse) // Put custom error for future
         }
         
         try await user.updatePassword(to: password)
     }
     
-    func updateEmil(email: String) async throws {
+    func updateEmail(email: String) async throws {
         guard let user = Auth.auth().currentUser else {
             throw URLError(.badServerResponse)
         }
         
-//        try await user.updateEmail(to: email)  //Depricated
-        try await user.sendEmailVerification(beforeUpdatingEmail: email) //Check this i think its wrong
+        // try await user.updateEmail(to: email)  // Depricated
+        try await user.sendEmailVerification(beforeUpdatingEmail: email) // Check this i think its wrong
     }
 }
 
@@ -114,8 +113,7 @@ extension AuthenticationManager {
         let credential = OAuthProvider.credential(withProviderID: AuthProviderOption.apple.rawValue, idToken: tokens.token, rawNonce: tokens.nonce)
         return try await signIn(credential: credential)
     }
-
-
+    
     func signIn(credential: AuthCredential) async throws -> AuthDataResultModel {
         let authDataResult = try await Auth.auth().signIn(with: credential)
         return AuthDataResultModel(user: authDataResult.user)
