@@ -53,6 +53,7 @@ struct SettingsView: View {
                         try viewModel.signOut()
                         showSignInView = true
                         print("Signed Out")
+                        print("showSignInView: \(showSignInView)")
                     } catch {
                         print("Couldn't sign out")
                         print(error) // Change for future
@@ -66,7 +67,7 @@ struct SettingsView: View {
         }
         .onAppear() {
             viewModel.loadAuthProviders()
-            print("Hello")
+            print("Opened Settings")
         }
         .navigationTitle("Settings")
     }

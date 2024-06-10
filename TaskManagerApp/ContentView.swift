@@ -21,7 +21,8 @@ struct ContentView: View {
             VStack(alignment: .leading) {
                 HStack {
                     // NavigationLink for SettingsView
-                    NavigationLink(destination: SettingsView(showSignInView: .constant(false))) {
+//                    NavigationLink(destination: SettingsView(showSignInView: .constant(false))) {
+                    NavigationLink(destination: SettingsView(showSignInView: $showSignInView)) {
                         Image(systemName: "gearshape.fill")
                             .resizable()
                             .imageScale(.large)
