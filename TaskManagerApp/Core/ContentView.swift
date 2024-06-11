@@ -12,9 +12,22 @@
 
 import SwiftUI
 
+@MainActor
+final class ContentViewModel: ObservableObject {
+    
+    @Published private(set) var user: AuthDataResultModel? = nil
+
+    func loadCurrentUser() throws {
+        self.user = try AuthenticationManager.shared.getAuthenticatedUser()
+    }
+    
+}
+
 struct ContentView: View {
     @State private var newListModalOpen = false
     @Binding var showSignInView: Bool
+    
+    @StateObject private var viewModel = ContentViewModel()
 
     var body: some View {
         NavigationView {
@@ -62,12 +75,18 @@ struct ContentView: View {
                             .frame(width: 35, height: 35)
                     }
                 }
-
+//                if let user = viewModel.user {
+//                    Text("UserId: \(user.uid)")
+//                }
                 Spacer()
             }
             .padding()
         }
+        .onAppear() {
+            try? viewModel.loadCurrentUser()
+        }
         .toolbar(.hidden)
+        
     }
 }
 
