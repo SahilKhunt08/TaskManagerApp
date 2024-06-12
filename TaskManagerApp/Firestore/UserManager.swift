@@ -15,6 +15,7 @@ struct DBUser: Codable{
     let photoUrl: String?
     let dateCreated: Date?
     let isPremium: Bool?
+    let username: String?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -22,6 +23,7 @@ struct DBUser: Codable{
         self.photoUrl = auth.photoUrl
         self.dateCreated = Date()
         self.isPremium = false
+        self.username = ""
     }
     
     init(
@@ -29,13 +31,15 @@ struct DBUser: Codable{
         email: String? = nil,
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
-        isPremium: Bool? = nil
+        isPremium: Bool? = nil,
+        username: String? = nil
     ) {
         self.userId = userId
         self.email = email
         self.photoUrl = photoUrl
         self.dateCreated = dateCreated
         self.isPremium = isPremium
+        self.username = username
     }
     
 //    func togglePremiumStatus() -> DBUser {
@@ -59,6 +63,7 @@ struct DBUser: Codable{
         case photoUrl = "photo_url"
         case dateCreated = "date_created"
         case isPremium = "user_isPremium"
+        case username = "username"
     }
     
     init(from decoder: Decoder) throws {
@@ -68,6 +73,7 @@ struct DBUser: Codable{
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
+        self.username = try container.decodeIfPresent(String.self, forKey: .username)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -77,6 +83,7 @@ struct DBUser: Codable{
         try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
+        try container.encodeIfPresent(self.username, forKey: .username)
     }
 }
 
@@ -151,5 +158,15 @@ final class UserManager {
         try await userDocument(userId: userId).updateData(data)
     }
     
+    func updateUsername(userId: String, username: String) async throws {
+        let data: [String:Any] = [
+            DBUser.CodingKeys.username.rawValue : username
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    func getCurrentUsername(userId: String) async throws -> String {
+        let user = try await getUser(userId: userId)
+        return user.username ?? "No username"
+    }
 }
 

@@ -30,6 +30,7 @@ struct SettingsView: View {
             if(viewModel.authProviders.contains(.email)) {
                 emailSection
             }
+            usernameSection
         }
         .onAppear() {
             viewModel.loadAuthProviders()
@@ -72,6 +73,25 @@ struct SettingsView: View {
             }
         } header: {
             Text("Email Functions")
+        }
+    }
+    
+    private var usernameSection: some View {
+        Section {
+            TextField("Username", text: $viewModel.username)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button("Update Username") {
+                Task {
+                    do {
+                        try await viewModel.updateUsername()
+                        print("USERNAME UPDATED!") // Put some sort of alert on the screen for the future
+                    } catch {
+                        print(error) // Change for future
+                    }
+                }
+            }
+        } header: {
+            Text("Username")
         }
     }
 }
