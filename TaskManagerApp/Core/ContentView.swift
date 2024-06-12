@@ -15,10 +15,11 @@ import SwiftUI
 @MainActor
 final class ContentViewModel: ObservableObject {
     
-    @Published private(set) var user: AuthDataResultModel? = nil
+    @Published private(set) var user: DBUser? = nil
 
-    func loadCurrentUser() throws {
-        self.user = try AuthenticationManager.shared.getAuthenticatedUser()
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
     
 }
@@ -75,15 +76,15 @@ struct ContentView: View {
                             .frame(width: 35, height: 35)
                     }
                 }
-//                if let user = viewModel.user {
-//                    Text("UserId: \(user.uid)")
-//                }
+                if let user = viewModel.user {
+                    Text("UserId: \(user.userId)")
+                }
                 Spacer()
             }
             .padding()
         }
-        .onAppear() {
-            try? viewModel.loadCurrentUser()
+        .task() {
+            try? await viewModel.loadCurrentUser()
         }
         .toolbar(.hidden)
         
