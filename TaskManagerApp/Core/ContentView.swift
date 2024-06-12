@@ -22,6 +22,14 @@ final class ContentViewModel: ObservableObject {
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
     
+    func togglePremmiumStatus() {
+        guard let user else { return }
+        let currentValue = user.isPremium ?? false
+        Task {
+            try await UserManager.shared.updatePremiumStatus(userId: user.userId, isPremium: !currentValue)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
+    }
 }
 
 struct ContentView: View {
@@ -78,7 +86,13 @@ struct ContentView: View {
                 }
                 if let user = viewModel.user {
                     Text("UserId: \(user.userId)")
+                    Button {
+                        viewModel.togglePremmiumStatus()
+                    } label: {
+                        Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
+                    }
                 }
+
                 Spacer()
             }
             .padding()
