@@ -26,15 +26,14 @@ final class ContentViewModel: ObservableObject {
 struct ContentView: View {
     @State private var newListModalOpen = false
     @Binding var showSignInView: Bool
-    
+    private let firestoreIDs: [String] = ["id1", "id2", "id3", "id4", "00"] //get ids from firestore
+
     @StateObject private var viewModel = ContentViewModel()
 
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
                 HStack {
-                    // NavigationLink for SettingsView
-//                    NavigationLink(destination: SettingsView(showSignInView: .constant(false))) {
                     NavigationLink(destination: SettingsView(showSignInView: $showSignInView)) {
                         Image(systemName: "gearshape.fill")
                             .resizable()
@@ -75,10 +74,48 @@ struct ContentView: View {
                             .frame(width: 35, height: 35)
                     }
                 }
-//                if let user = viewModel.user {
-//                    Text("UserId: \(user.uid)")
-//                }
+                
                 Spacer()
+                Spacer()
+
+                
+                VStack {
+                    TabView {
+                        ForEach(firestoreIDs, id: \.self) { id in
+                            ZStack {
+                                Color.gray.opacity(0.2) // Background color for each page
+                                if(id == "00") { //show new/join family UI
+                                    Text(id)
+                                        .font(.title)
+                                        .foregroundColor(.black)
+                                        .padding()
+                                        .background(Color.blue)
+                                        .cornerRadius(10)
+                                } else { //get firestore data and store in cards
+                                    Text(id)
+                                        .font(.title)
+                                        .foregroundColor(.black)
+                                        .padding()
+                                        .background(Color.white)
+                                        .cornerRadius(10)
+                                        .onAppear{
+                                            
+                                        }
+                                }
+                            }
+                           
+                        }
+                    }
+                    .tabViewStyle(.page)
+                    .indexViewStyle(.page(backgroundDisplayMode: .interactive))
+                    .cornerRadius(30)
+                }
+                
+                
+                
+                
+                
+                
             }
             .padding()
         }
