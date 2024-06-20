@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		6F9495702C23F0CC009F42DC /* NewFamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F94956F2C23F0CC009F42DC /* NewFamilyView.swift */; };
 		6FE148DB2C1182CF003DCA4C /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FE148DA2C1182CF003DCA4C /* FirebaseFirestoreSwift */; };
-		6FE148DF2C156B01003DCA4C /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE148DE2C156B01003DCA4C /* NewListView.swift */; };
 		A04F0FBD2C0BD446007E7DF6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBC2C0BD446007E7DF6 /* FirebaseAnalytics */; };
 		A04F0FBF2C0BD446007E7DF6 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FBE2C0BD446007E7DF6 /* FirebaseAnalyticsSwift */; };
 		A04F0FC12C0BD446007E7DF6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = A04F0FC02C0BD446007E7DF6 /* FirebaseAuth */; };
@@ -31,6 +30,7 @@
 		A0B7ADA92C0D5F5600D7DEAE /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A0B7ADA82C0D5F5600D7DEAE /* GoogleSignInSwift */; };
 		A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */; };
 		A0B7ADAF2C0D6B3900D7DEAE /* SignInGoogleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */; };
+		A0BEABB32C24B41700BABAD6 /* NewListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BEABB22C24B41700BABAD6 /* NewListView.swift */; };
 		A0C3A96E2C11054A000D6F04 /* SignInAppleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */; };
 		A0EB93AF2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */; };
 		A0F26D622C16806C0001B104 /* TempWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F26D612C16806C0001B104 /* TempWork.swift */; };
@@ -59,7 +59,6 @@
 
 /* Begin PBXFileReference section */
 		6F94956F2C23F0CC009F42DC /* NewFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFamilyView.swift; sourceTree = "<group>"; };
-		6FE148DE2C156B01003DCA4C /* NewListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewListView.swift; sourceTree = "<group>"; };
 		A0580EF02C18D34A0086D97E /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		A06A2DFF2C09558600FB2F52 /* TaskManagerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManagerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerAppApp.swift; sourceTree = "<group>"; };
@@ -80,6 +79,7 @@
 		A0B7ADAA2C0D5F9200D7DEAE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A0B7ADAC2C0D621B00D7DEAE /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		A0B7ADAE2C0D6B3900D7DEAE /* SignInGoogleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInGoogleHelper.swift; sourceTree = "<group>"; };
+		A0BEABB22C24B41700BABAD6 /* NewListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewListView.swift; path = ../../../../Downloads/NewListView.swift; sourceTree = "<group>"; };
 		A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TaskManagerApp.entitlements; sourceTree = "<group>"; };
 		A0C3A96D2C11054A000D6F04 /* SignInAppleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAppleHelper.swift; sourceTree = "<group>"; };
 		A0EB93AE2C0A565A00AE32F9 /* Screenshot 2024-05-31 at 1.51.57 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2024-05-31 at 1.51.57 PM.png"; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 			children = (
 				A0C3A96C2C10F224000D6F04 /* TaskManagerApp.entitlements */,
 				A06A2E022C09558600FB2F52 /* TaskManagerAppApp.swift */,
-				6FE148DE2C156B01003DCA4C /* NewListView.swift */,
 				A0F26D612C16806C0001B104 /* TempWork.swift */,
 				A0FF8C8C2C17E31A00F86F67 /* Core */,
 				A0B7ADAB2C0D61F700D7DEAE /* Utilities */,
@@ -224,8 +223,8 @@
 			isa = PBXGroup;
 			children = (
 				A0753E412C0D257E005B9FF3 /* RootView.swift */,
-				6FE148DE2C156B01003DCA4C /* NewListView.swift */,
 				A06A2E042C09558600FB2F52 /* ContentView.swift */,
+				A0BEABB22C24B41700BABAD6 /* NewListView.swift */,
 				A0FF8C902C17E3A200F86F67 /* Authentication */,
 				A0FF8C8D2C17E35100F86F67 /* Settings */,
 				6F94956F2C23F0CC009F42DC /* NewFamilyView.swift */,
@@ -411,6 +410,7 @@
 				A0753E442C0D291A005B9FF3 /* SettingsView.swift in Sources */,
 				A0FF8C922C17E3C300F86F67 /* AuthenticationViewModel.swift in Sources */,
 				A0753E402C0D1EDB005B9FF3 /* AuthenticationManager.swift in Sources */,
+				A0BEABB32C24B41700BABAD6 /* NewListView.swift in Sources */,
 				6F9495702C23F0CC009F42DC /* NewFamilyView.swift in Sources */,
 				A0FF8C8F2C17E36B00F86F67 /* SettingsViewModel.swift in Sources */,
 				A0580EF12C18D34A0086D97E /* UserManager.swift in Sources */,
@@ -421,7 +421,6 @@
 				A06A2E032C09558600FB2F52 /* TaskManagerAppApp.swift in Sources */,
 				A0B7ADAD2C0D621B00D7DEAE /* Utilities.swift in Sources */,
 				A0753E3C2C0D1A0D005B9FF3 /* AuthenticationView.swift in Sources */,
-				6FE148DF2C156B01003DCA4C /* NewListView.swift in Sources */,
 				A0FF8C952C17E46700F86F67 /* SignInEmailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
