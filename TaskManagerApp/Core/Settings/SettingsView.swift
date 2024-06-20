@@ -27,13 +27,24 @@ struct SettingsView: View {
                 }
             }
             
+            if let user = viewModel.user {
+                Section {
+                    Text("User ID: \(user.userId)")
+                    Text("Username: \(user.username)") // Assuming `username` is a property of `DBUser`
+                }
+            }
+            
             if(viewModel.authProviders.contains(.email)) {
                 emailSection
             }
+            usernameSection
         }
         .onAppear() {
             viewModel.loadAuthProviders()
             print("Opened Settings")
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
         .navigationTitle("Settings")
     }
@@ -72,6 +83,25 @@ struct SettingsView: View {
             }
         } header: {
             Text("Email Functions")
+        }
+    }
+    
+    private var usernameSection: some View {
+        Section {
+            TextField("Username", text: $viewModel.username)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+            Button("Update Username") {
+                Task {
+                    do {
+                        try await viewModel.updateUsername()
+                        print("USERNAME UPDATED!") // Put some sort of alert on the screen for the future
+                    } catch {
+                        print(error) // Change for future
+                    }
+                }
+            }
+        } header: {
+            Text("Username")
         }
     }
 }

@@ -15,12 +15,21 @@ import SwiftUI
 @MainActor
 final class ContentViewModel: ObservableObject {
     
-    @Published private(set) var user: AuthDataResultModel? = nil
+    @Published private(set) var user: DBUser? = nil
 
-    func loadCurrentUser() throws {
-        self.user = try AuthenticationManager.shared.getAuthenticatedUser()
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
     }
     
+    func togglePremmiumStatus() {
+        guard let user else { return }
+        let currentValue = user.isPremium ?? false
+        Task {
+            try await UserManager.shared.updatePremiumStatus(userId: user.userId, isPremium: !currentValue)
+            self.user = try await UserManager.shared.getUser(userId: user.userId)
+        }
+    }
 }
 
 struct ContentView: View {
@@ -75,7 +84,14 @@ struct ContentView: View {
                             .frame(width: 35, height: 35)
                     }
                 }
-                
+                if let user = viewModel.user {
+                    Text("UserId: \(user.userId)")
+                    Button {
+                        viewModel.togglePremmiumStatus()
+                    } label: {
+                        Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
+                    }
+                }
                 Spacer()
                 Spacer()
 
@@ -140,8 +156,9 @@ struct ContentView: View {
             }
             .padding()
         }
-        .onAppear() {
-            try? viewModel.loadCurrentUser()
+        .task() {
+            try? await viewModel.loadCurrentUser()
+            print("Opened ContentView")
         }
         .toolbar(.hidden)
         
