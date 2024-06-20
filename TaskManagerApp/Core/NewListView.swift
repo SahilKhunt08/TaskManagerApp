@@ -48,7 +48,7 @@ struct NewListView: View {
                 
                 Button(action: {
                     newListModalOpen = false
-                    let ref = db.collection("lists").document()
+                    let ref = db.collection("lists").document()//fix this
                     ref.setData([
                         "id": ref.documentID,
                         "name": listName,
