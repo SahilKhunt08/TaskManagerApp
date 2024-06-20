@@ -153,3 +153,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(showSignInView: .constant(false))
     }
 }
+
