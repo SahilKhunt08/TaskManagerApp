@@ -25,8 +25,9 @@ final class ContentViewModel: ObservableObject {
 
 struct ContentView: View {
     @State private var newListModalOpen = false
+    @State private var newFamilyModalOpen = false
     @Binding var showSignInView: Bool
-    private let firestoreIDs: [String] = ["id1", "id2", "id3", "id4", "00"] //get ids from firestore
+    private let firestoreIDs: [String] = ["00"] //get ids from firestore
 
     @StateObject private var viewModel = ContentViewModel()
 
@@ -83,14 +84,34 @@ struct ContentView: View {
                     TabView {
                         ForEach(firestoreIDs, id: \.self) { id in
                             ZStack {
-                                Color.gray.opacity(0.2) // Background color for each page
+                                Color.gray.opacity(0.2)
                                 if(id == "00") { //show new/join family UI
-                                    Text(id)
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(Color.blue)
-                                        .cornerRadius(10)
+                                    HStack {
+                                        
+                                        
+                                        Button(action: {
+                                            newFamilyModalOpen = true
+                                        }, label: {
+                                            Text("NF")
+                                                .font(.title)
+                                                .foregroundColor(  .black)
+                                                .padding()
+                                                .background(Color.blue)
+                                                .cornerRadius(10)
+                                        }).sheet(isPresented: $newFamilyModalOpen, content: {
+                                            NewFamilyView(newFamilyModalOpen: $newFamilyModalOpen)
+                                        })
+                                        
+                                        Button(action: {
+                                        }, label: {
+                                            Text("JF")
+                                                .font(.title)
+                                                .foregroundColor(.black)
+                                                .padding()
+                                                .background(Color.blue)
+                                                .cornerRadius(10)
+                                        })
+                                    }
                                 } else { //get firestore data and store in cards
                                     Text(id)
                                         .font(.title)
