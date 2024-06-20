@@ -12,6 +12,12 @@ final class SettingsViewModel: ObservableObject {
     @Published var authProviders: [AuthProviderOption] = []
     @Published var username: String = ""
 
+    @Published private(set) var user: DBUser? = nil
+
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+    }
     
     func loadAuthProviders() {
         if let provider = try? AuthenticationManager.shared.getProviders() {

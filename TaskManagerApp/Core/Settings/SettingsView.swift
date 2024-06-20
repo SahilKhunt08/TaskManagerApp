@@ -27,6 +27,13 @@ struct SettingsView: View {
                 }
             }
             
+            if let user = viewModel.user {
+                Section {
+                    Text("User ID: \(user.userId)")
+                    Text("Username: \(user.username)") // Assuming `username` is a property of `DBUser`
+                }
+            }
+            
             if(viewModel.authProviders.contains(.email)) {
                 emailSection
             }
@@ -35,6 +42,9 @@ struct SettingsView: View {
         .onAppear() {
             viewModel.loadAuthProviders()
             print("Opened Settings")
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
         .navigationTitle("Settings")
     }

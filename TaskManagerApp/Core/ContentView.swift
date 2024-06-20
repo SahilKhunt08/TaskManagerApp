@@ -99,6 +99,7 @@ struct ContentView: View {
         }
         .task() {
             try? await viewModel.loadCurrentUser()
+            print("Opened ContentView")
         }
         .toolbar(.hidden)
         
