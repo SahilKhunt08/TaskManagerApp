@@ -11,11 +11,24 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 
+@MainActor
+final class NewFamilyViewModel: ObservableObject {
+    @Published private(set) var user: DBUser? = nil
+    
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+    }
+}
+
 struct NewFamilyView: View {
     @State var familyName = ""
     @State var listContent = ""
     @Binding var newFamilyModalOpen: Bool
     let db = Firestore.firestore()
+    
+    @StateObject private var viewModel = NewFamilyViewModel()
+
    
     var body: some View {
         VStack {
@@ -23,7 +36,10 @@ struct NewFamilyView: View {
                 Text("1️⃣ Set a Family Name ")
                     .font(.system(size: 20))
                     .bold()
-                TextField("Family Name", text: $familyName)
+                
+                if let user = viewModel.user {
+                    TextField(user.userId, text: $familyName)
+                }
                 
                 Button(action: {
                     let ref = db.collection("families").document()

@@ -57,6 +57,9 @@ struct ContentView: View {
 
                     Button(action: {
                         newListModalOpen = true
+                        if let user = viewModel.user {
+                            print(user.userId)
+                        }
                     }, label: {
                         Image(systemName: "pencil")
                             .resizable()
