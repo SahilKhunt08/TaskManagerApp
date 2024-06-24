@@ -13,6 +13,7 @@ import FirebaseFirestore
 
 @MainActor
 final class NewFamilyViewModel: ObservableObject {
+    
     @Published private(set) var user: DBUser? = nil
     
     func loadCurrentUser() async throws {
@@ -36,33 +37,48 @@ struct NewFamilyView: View {
                 Text("1️⃣ Set a Family Name ")
                     .font(.system(size: 20))
                     .bold()
-                
+                TextField("Family Name", text: $familyName)
+
                 if let user = viewModel.user {
-                    TextField(user.userId, text: $familyName)
-                }
+                    Text("UserId: \(user.userId)")
+                    
                 
-                Button(action: {
-                    let ref = db.collection("families").document()
-                    ref.setData([
-                        "id": ref.documentID,
-                        "name": familyName,
-                    ]) { error in
-                        if let error = error {
-                               print("Error adding document: \(error)")
-                           } else {
-                               print("Document successfully added with ID: \(ref.documentID)")
-                           }
-                        }
-                }) {
-                    Text("Submit")
-                        .font(.system(size: 20))
-                        .padding(.horizontal, 50)
+                } else {
+                    Text("does not work")
+
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color("Color 1"))
-                .frame(maxWidth: .infinity)
+                    
+                    
+                    
+                    
+                    Button(action: {
+                        let ref = db.collection("families").document()
+                        ref.setData([
+                            "id": ref.documentID,
+                            "name": familyName,
+                           
+                        ]) { error in
+                            if let error = error {
+                                print("Error adding document: \(error)")
+                            } else {
+                                print("Document successfully added with ID: \(ref.documentID)")
+                            }
+                        }
+                        
+                    }) {
+                        Text("Submit")
+                            .font(.system(size: 20))
+                            .padding(.horizontal, 50)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color("Color 1"))
+                    .frame(maxWidth: .infinity)
                 
             }
+        }
+        .task() {
+            try? await viewModel.loadCurrentUser()
+            print("Opened ContentView")
         }
     }
 }

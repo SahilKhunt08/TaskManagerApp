@@ -57,9 +57,6 @@ struct ContentView: View {
 
                     Button(action: {
                         newListModalOpen = true
-                        if let user = viewModel.user {
-                            print(user.userId)
-                        }
                     }, label: {
                         Image(systemName: "pencil")
                             .resizable()
@@ -106,8 +103,6 @@ struct ContentView: View {
                                 Color.gray.opacity(0.2)
                                 if(id == "00") { //show new/join family UI
                                     HStack {
-                                        
-                                        
                                         Button(action: {
                                             newFamilyModalOpen = true
                                         }, label: {
@@ -150,12 +145,6 @@ struct ContentView: View {
                     .indexViewStyle(.page(backgroundDisplayMode: .interactive))
                     .cornerRadius(30)
                 }
-                
-                
-                
-                
-                
-                
             }
             .padding()
         }
