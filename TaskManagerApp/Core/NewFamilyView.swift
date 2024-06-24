@@ -29,8 +29,8 @@ struct NewFamilyView: View {
     let db = Firestore.firestore()
     
     @StateObject private var viewModel = NewFamilyViewModel()
-
-   
+    
+    
     var body: some View {
         VStack {
             Form {
@@ -38,25 +38,17 @@ struct NewFamilyView: View {
                     .font(.system(size: 20))
                     .bold()
                 TextField("Family Name", text: $familyName)
-
+                
                 if let user = viewModel.user {
                     Text("UserId: \(user.userId)")
-                    
-                
-                } else {
-                    Text("does not work")
-
-                }
-                    
-                    
-                    
-                    
+                    let userId = user.userId
                     Button(action: {
                         let ref = db.collection("families").document()
                         ref.setData([
                             "id": ref.documentID,
                             "name": familyName,
-                           
+                            "members": [user.userId]
+                            
                         ]) { error in
                             if let error = error {
                                 print("Error adding document: \(error)")
@@ -73,6 +65,10 @@ struct NewFamilyView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(Color("Color 1"))
                     .frame(maxWidth: .infinity)
+                    
+                } else {
+                    Text("does not work")
+                }
                 
             }
         }
