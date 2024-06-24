@@ -11,12 +11,26 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 
+@MainActor
+final class NewFamilyViewModel: ObservableObject {
+    
+    @Published private(set) var user: DBUser? = nil
+    
+    func loadCurrentUser() async throws {
+        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+    }
+}
+
 struct NewFamilyView: View {
     @State var familyName = ""
     @State var listContent = ""
     @Binding var newFamilyModalOpen: Bool
     let db = Firestore.firestore()
-   
+    
+    @StateObject private var viewModel = NewFamilyViewModel()
+    
+    
     var body: some View {
         VStack {
             Form {
@@ -25,28 +39,42 @@ struct NewFamilyView: View {
                     .bold()
                 TextField("Family Name", text: $familyName)
                 
-                Button(action: {
-                    let ref = db.collection("families").document()
-                    ref.setData([
-                        "id": ref.documentID,
-                        "name": familyName,
-                    ]) { error in
-                        if let error = error {
-                               print("Error adding document: \(error)")
-                           } else {
-                               print("Document successfully added with ID: \(ref.documentID)")
-                           }
+                if let user = viewModel.user {
+                    Text("UserId: \(user.userId)")
+                    let userId = user.userId
+                    Button(action: {
+                        let ref = db.collection("families").document()
+                        ref.setData([
+                            "id": ref.documentID,
+                            "name": familyName,
+                            "members": [user.userId]
+                            
+                        ]) { error in
+                            if let error = error {
+                                print("Error adding document: \(error)")
+                            } else {
+                                print("Document successfully added with ID: \(ref.documentID)")
+                            }
                         }
-                }) {
-                    Text("Submit")
-                        .font(.system(size: 20))
-                        .padding(.horizontal, 50)
+                        
+                    }) {
+                        Text("Submit")
+                            .font(.system(size: 20))
+                            .padding(.horizontal, 50)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color("Color 1"))
+                    .frame(maxWidth: .infinity)
+                    
+                } else {
+                    Text("does not work")
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(Color("Color 1"))
-                .frame(maxWidth: .infinity)
                 
             }
+        }
+        .task() {
+            try? await viewModel.loadCurrentUser()
+            print("Opened ContentView")
         }
     }
 }

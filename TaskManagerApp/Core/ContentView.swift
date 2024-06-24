@@ -16,7 +16,7 @@ import SwiftUI
 final class ContentViewModel: ObservableObject {
     
     @Published private(set) var user: DBUser? = nil
-
+    
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
@@ -37,9 +37,9 @@ struct ContentView: View {
     @State private var newFamilyModalOpen = false
     @Binding var showSignInView: Bool
     private let firestoreIDs: [String] = ["00"] //get ids from firestore
-
+    
     @StateObject private var viewModel = ContentViewModel()
-
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading) {
@@ -54,7 +54,7 @@ struct ContentView: View {
                     }
                     
                     Spacer()
-
+                    
                     Button(action: {
                         newListModalOpen = true
                     }, label: {
@@ -70,12 +70,12 @@ struct ContentView: View {
                     })
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
-
+                
                 Text("List Name")
                     .bold()
                     .font(.largeTitle)
                     .frame(alignment: .leading)
-
+                
                 HStack { // Temp...will change
                     ForEach(0..<5) { _ in
                         Image(systemName: "person.crop.circle")
@@ -94,7 +94,7 @@ struct ContentView: View {
                 }
                 Spacer()
                 Spacer()
-
+                
                 
                 VStack {
                     TabView {
@@ -103,8 +103,6 @@ struct ContentView: View {
                                 Color.gray.opacity(0.2)
                                 if(id == "00") { //show new/join family UI
                                     HStack {
-                                        
-                                        
                                         Button(action: {
                                             newFamilyModalOpen = true
                                         }, label: {
@@ -140,19 +138,13 @@ struct ContentView: View {
                                         }
                                 }
                             }
-                           
+                            
                         }
                     }
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .interactive))
                     .cornerRadius(30)
                 }
-                
-                
-                
-                
-                
-                
             }
             .padding()
         }
