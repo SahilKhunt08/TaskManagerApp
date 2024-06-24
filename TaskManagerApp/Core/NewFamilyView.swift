@@ -41,11 +41,10 @@ struct NewFamilyView: View {
                 
                 if let user = viewModel.user {
                     Text("UserId: \(user.userId)")
-                    let userId = user.userId
                     Button(action: {
-                        let ref = db.collection("families").document()
-                        ref.setData([
-                            "id": ref.documentID,
+                        let familyRef = db.collection("families").document()
+                        familyRef.setData([
+                            "id": familyRef.documentID,
                             "name": familyName,
                             "members": [user.userId]
                             
@@ -53,9 +52,14 @@ struct NewFamilyView: View {
                             if let error = error {
                                 print("Error adding document: \(error)")
                             } else {
-                                print("Document successfully added with ID: \(ref.documentID)")
+                                print("Document successfully added with ID: \(familyRef.documentID)")
                             }
                         }
+                        
+                        let userRef = db.collection("users").document("\(user.userId)")
+                        userRef.updateData([
+                            "families": [familyRef.documentID]
+                            ])
                         
                     }) {
                         Text("Submit")

@@ -12,6 +12,9 @@
 
 import SwiftUI
 
+import FirebaseCore
+import FirebaseFirestore
+
 @MainActor
 final class ContentViewModel: ObservableObject {
     
@@ -36,9 +39,13 @@ struct ContentView: View {
     @State private var newListModalOpen = false
     @State private var newFamilyModalOpen = false
     @Binding var showSignInView: Bool
-    private let firestoreIDs: [String] = ["00"] //get ids from firestore
+    public var firestoreIDs: [String] = ["00"] //get ids from firestore
+    let db = Firestore.firestore()
+
     
     @StateObject private var viewModel = ContentViewModel()
+    
+    
     
     var body: some View {
         NavigationView {
@@ -151,6 +158,26 @@ struct ContentView: View {
         .task() {
             try? await viewModel.loadCurrentUser()
             print("Opened ContentView")
+            if let user = viewModel.user {
+                print("auth works")
+                let docRef = db.collection("users").document("\(user.userId)")
+                docRef.getDocument { (document, error) in
+                           if let document = document, document.exists {
+                               // Access the array field
+                               if let arrayField = document.get("families") as? [String] {
+                                   print("Array field: \(arrayField)")
+                                   firestoreIDs = arrayField
+                               } else {
+                                   print("Array field is not found or not an array")
+                               }
+                           } else {
+                               print("Document does not exist or error: \(String(describing: error))")
+                           }
+                       }
+
+            }
+            
+
         }
         .toolbar(.hidden)
         
