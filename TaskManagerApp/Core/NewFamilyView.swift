@@ -11,17 +11,6 @@ import SwiftUI
 import FirebaseCore
 import FirebaseFirestore
 
-@MainActor
-final class NewFamilyViewModel: ObservableObject {
-    
-    @Published private(set) var user: DBUser? = nil
-    
-    func loadCurrentUser() async throws {
-        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-        self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
-    }
-}
-
 struct NewFamilyView: View {
     @State var familyName = ""
     @State var listContent = ""
@@ -41,7 +30,6 @@ struct NewFamilyView: View {
                 
                 if let user = viewModel.user {
                     Text("UserId: \(user.userId)")
-                    let userId = user.userId
                     Button(action: {
                         let ref = db.collection("families").document()
                         ref.setData([

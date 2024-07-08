@@ -16,6 +16,7 @@ struct DBUser: Codable{
     let dateCreated: Date?
     let isPremium: Bool?
     let username: String?
+    let families: [String]?
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -24,6 +25,7 @@ struct DBUser: Codable{
         self.dateCreated = Date()
         self.isPremium = false
         self.username = ""
+        self.families = nil
     }
     
     init(
@@ -32,7 +34,8 @@ struct DBUser: Codable{
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
-        username: String? = nil
+        username: String? = nil,
+        families: [String]? = nil
     ) {
         self.userId = userId
         self.email = email
@@ -40,6 +43,7 @@ struct DBUser: Codable{
         self.dateCreated = dateCreated
         self.isPremium = isPremium
         self.username = username
+        self.families = families
     }
     
 //    func togglePremiumStatus() -> DBUser {
@@ -64,6 +68,7 @@ struct DBUser: Codable{
         case dateCreated = "date_created"
         case isPremium = "user_isPremium"
         case username = "username"
+        case families = "families"
     }
     
     init(from decoder: Decoder) throws {
@@ -74,6 +79,7 @@ struct DBUser: Codable{
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.username = try container.decodeIfPresent(String.self, forKey: .username)
+        self.families = try container.decodeIfPresent([String].self, forKey: .families)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -84,6 +90,7 @@ struct DBUser: Codable{
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.username, forKey: .username)
+        try container.encodeIfPresent(self.families, forKey: .families)
     }
 }
 
@@ -168,5 +175,13 @@ final class UserManager {
         let user = try await getUser(userId: userId)
         return user.username ?? "No username"
     }
+    
+    func addFamily(userId: String, family: String) async throws {
+        let data: [String:Any] = [
+            DBUser.CodingKeys.families.rawValue : [family]
+        ]
+        try await userDocument(userId: userId).updateData(data)
+    }
+    
 }
 
