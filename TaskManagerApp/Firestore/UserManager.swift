@@ -16,7 +16,7 @@ struct DBUser: Codable{
     let dateCreated: Date?
     let isPremium: Bool?
     let username: String?
-    let families: [String]?
+    let families: [String]
     
     init(auth: AuthDataResultModel) {
         self.userId = auth.uid
@@ -25,7 +25,7 @@ struct DBUser: Codable{
         self.dateCreated = Date()
         self.isPremium = false
         self.username = ""
-        self.families = nil
+        self.families = []
     }
     
     init(
@@ -35,7 +35,7 @@ struct DBUser: Codable{
         dateCreated: Date? = nil,
         isPremium: Bool? = nil,
         username: String? = nil,
-        families: [String]? = nil
+        families: [String] = []
     ) {
         self.userId = userId
         self.email = email
@@ -79,7 +79,7 @@ struct DBUser: Codable{
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
         self.username = try container.decodeIfPresent(String.self, forKey: .username)
-        self.families = try container.decodeIfPresent([String].self, forKey: .families)
+        self.families = try container.decode([String].self, forKey: .families)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -176,12 +176,22 @@ final class UserManager {
         return user.username ?? "No username"
     }
     
-    func addFamily(userId: String, family: String) async throws {
+//    func addFamily(userId: String, family: String) async throws {
+//        let data: [String:Any] = [
+//            DBUser.CodingKeys.families.rawValue : [family]
+//        ]
+//        try await userDocument(userId: userId).updateData(data)
+//    }
+    
+    func addFamily(userId: String, family: String) async throws { //Add's family to user's array
+        let user = try await getUser(userId: userId)
+        var updatedFamilies = user.families
+        updatedFamilies.append(family)
+        
         let data: [String:Any] = [
-            DBUser.CodingKeys.families.rawValue : [family]
+            DBUser.CodingKeys.families.rawValue : updatedFamilies
         ]
         try await userDocument(userId: userId).updateData(data)
     }
     
 }
-

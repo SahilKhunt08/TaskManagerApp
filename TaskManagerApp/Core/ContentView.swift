@@ -35,6 +35,7 @@ final class ContentViewModel: ObservableObject {
 struct ContentView: View {
     @State private var newListModalOpen = false
     @State private var newFamilyModalOpen = false
+    @State private var addFamilyModalOpen = false
     @Binding var showSignInView: Bool
     private let firestoreIDs: [String] = ["00"] //get ids from firestore
     
@@ -117,6 +118,7 @@ struct ContentView: View {
                                         })
                                         
                                         Button(action: {
+                                            addFamilyModalOpen = true
                                         }, label: {
                                             Text("JF")
                                                 .font(.title)
@@ -124,6 +126,8 @@ struct ContentView: View {
                                                 .padding()
                                                 .background(Color.blue)
                                                 .cornerRadius(10)
+                                        }).sheet(isPresented: $addFamilyModalOpen, content: {
+                                            AddFamilyView(addFamilyModalOpen: $addFamilyModalOpen)
                                         })
                                     }
                                 } else { //get firestore data and store in cards

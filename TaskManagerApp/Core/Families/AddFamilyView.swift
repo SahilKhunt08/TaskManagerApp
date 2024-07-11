@@ -1,50 +1,44 @@
 //
-//  NewFamilyView.swift
+//  AddFamilyView.swift
 //  TaskManagerApp
 //
-//  Created by Vedant on 6/20/24.
+//  Created by Sahil Khunt on 7/8/24.
 //
 
 import Foundation
 import SwiftUI
-
 import FirebaseCore
 import FirebaseFirestore
 
-struct NewFamilyView: View {
-    @State var familyName = ""
+struct AddFamilyView: View {
+    @State var familyCode = ""
     @State var listContent = ""
-    @Binding var newFamilyModalOpen: Bool
+    @Binding var addFamilyModalOpen: Bool
     let db = Firestore.firestore()
     
-    @StateObject private var viewModel = NewFamilyViewModel()
-    
+    @StateObject private var viewModel = FamilyViewModel()
     
     var body: some View {
         VStack {
             Form {
-                Text("1️⃣ Set a Family Name ")
+                Text("1️⃣ Enter Family Code ")
                     .font(.system(size: 20))
                     .bold()
-                TextField("Family Name", text: $familyName)
+                TextField("Family Code", text: $familyCode)
                 
                 if let user = viewModel.user {
                     Text("UserId: \(user.userId)")
                     Button(action: {
-                        let ref = db.collection("families").document()
-                        ref.setData([
-                            "id": ref.documentID,
-                            "name": familyName,
-                            "members": [user.userId]
-                            
-                        ]) { error in
-                            if let error = error {
-                                print("Error adding document: \(error)")
+                        viewModel.checkFamilyCode(familyCode: familyCode) { (exists, family_id) in
+                            if exists, let family_id = family_id {
+                                print("Family code exists with family_id: \(family_id)")
+                                // Add user to family
+                                viewModel.addUserToFamily(family_id: family_id)
                             } else {
-                                print("Document successfully added with ID: \(ref.documentID)")
+                                print("Family code not found")
+                                // Handle the case where the family code is not found
                             }
                         }
-                        
                     }) {
                         Text("Submit")
                             .font(.system(size: 20))
@@ -57,20 +51,20 @@ struct NewFamilyView: View {
                 } else {
                     Text("does not work")
                 }
-                
             }
         }
         .task() {
             try? await viewModel.loadCurrentUser()
-            print("Opened ContentView")
+            print("Opened AddFamilyView")
         }
     }
 }
 
 
-struct NewFamilyView_Previews: PreviewProvider {
+
+struct AddFamilyView_Previews: PreviewProvider {
     static var previews: some View {
-        NewFamilyView(newFamilyModalOpen: .constant(false))
+        AddFamilyView(addFamilyModalOpen: .constant(false))
     }
 }
 
