@@ -33,7 +33,7 @@ final class FamilyViewModel: ObservableObject {
                 ])
                 
                 // Add family ID to user's families array
-                let userRef = db.collection("members").document(user.userId)
+                let userRef = db.collection("users").document(user.userId)
                 try await userRef.updateData([
                     "families": FieldValue.arrayUnion([family_id])
                 ])
