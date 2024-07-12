@@ -11,11 +11,15 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 @MainActor
 final class ContentViewModel: ObservableObject {
     
     @Published private(set) var user: DBUser? = nil
+    let db = Firestore.firestore()
+
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
@@ -30,14 +34,38 @@ final class ContentViewModel: ObservableObject {
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
     }
+    
+    func loadUserFamilies() async -> [String]? {
+        guard let user = user else {
+            print("User is not set")
+            return nil
+        }
+        
+        let docRef = db.collection("users").document(user.userId)
+        
+        do {
+            let document = try await docRef.getDocument()
+            if let families = document.get("families") as? [String] {
+                return families
+            } else {
+                print("The 'families' field is not an array")
+                return nil
+            }
+        } catch {
+            print("Document does not exist or there was an error: \(error.localizedDescription)")
+            return nil
+        }
+    }
+
 }
+
 
 struct ContentView: View {
     @State private var newListModalOpen = false
     @State private var newFamilyModalOpen = false
     @State private var addFamilyModalOpen = false
     @Binding var showSignInView: Bool
-    private let firestoreIDs: [String] = ["00"] //get ids from firestore
+    var firestoreIDs: [String] = ["00"] //get ids from firestore
     
     @StateObject private var viewModel = ContentViewModel()
     
@@ -154,6 +182,7 @@ struct ContentView: View {
         }
         .task() {
             try? await viewModel.loadCurrentUser()
+            firestoreIDs =  viewModel.loadUserFamilies()
             print("Opened ContentView")
         }
         .toolbar(.hidden)
@@ -166,4 +195,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView(showSignInView: .constant(false))
     }
 }
+
 
