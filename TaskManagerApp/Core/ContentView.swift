@@ -35,27 +35,23 @@ final class ContentViewModel: ObservableObject {
         }
     }
     
-    func loadUserFamilies() async -> [String]? {
-        guard let user = user else {
-            print("User is not set")
-            return nil
-        }
-        
-        let docRef = db.collection("users").document(user.userId)
-        
-        do {
-            let document = try await docRef.getDocument()
-            if let families = document.get("families") as? [String] {
-                return families
-            } else {
-                print("The 'families' field is not an array")
-                return nil
-            }
-        } catch {
-            print("Document does not exist or there was an error: \(error.localizedDescription)")
-            return nil
-        }
-    }
+    func loadUserFamilies() async -> [String] {
+          guard let user = user else {
+              print("User is not set")
+              return []
+          }
+          
+          let docRef = db.collection("users").document(user.userId)
+          
+          do {
+              let document = try await docRef.getDocument()
+              let families = document.get("families") as? [String] ?? []
+              return families
+          } catch {
+              print("Document does not exist or there was an error: \(error.localizedDescription)")
+              return []
+          }
+      }
 
 }
 
@@ -65,7 +61,7 @@ struct ContentView: View {
     @State private var newFamilyModalOpen = false
     @State private var addFamilyModalOpen = false
     @Binding var showSignInView: Bool
-    var firestoreIDs: [String] = ["00"] //get ids from firestore
+    @State private var firestoreIDs: [String] = ["00"] //get ids from firestore
     
     @StateObject private var viewModel = ContentViewModel()
     
@@ -121,16 +117,16 @@ struct ContentView: View {
                         Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
                     }
                 }
-                Spacer()
-                Spacer()
                 
+                Spacer()
+                Spacer()
                 
                 VStack {
                     TabView {
-                        ForEach(firestoreIDs, id: \.self) { id in
+                        ForEach(0..<firestoreIDs.count, id: \.self) { index in
                             ZStack {
                                 Color.gray.opacity(0.2)
-                                if(id == "00") { //show new/join family UI
+                                if firestoreIDs[index] == "00" { //show new/join family UI
                                     HStack {
                                         Button(action: {
                                             newFamilyModalOpen = true
@@ -159,15 +155,72 @@ struct ContentView: View {
                                         })
                                     }
                                 } else { //get firestore data and store in cards
-                                    Text(id)
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(10)
-                                        .onAppear{
-                                            
+                                    ScrollView {
+                                        Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
+                                            GridRow {
+                                                ForEach(0..<2) {_ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text("\(index + 1)")
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                                )
+                                                    
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) {_ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text("\(index + 1)")
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                                )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) {_ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text("\(index + 1)")
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                                )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) {_ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text("\(index + 1)")
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                                )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) {_ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text("\(index + 1)")
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                                )
+                                                }
+                                            }
                                         }
+                                    }
+                                    
                                 }
                             }
                             
@@ -182,8 +235,9 @@ struct ContentView: View {
         }
         .task() {
             try? await viewModel.loadCurrentUser()
-            firestoreIDs =  viewModel.loadUserFamilies()
-            print("Opened ContentView")
+            firestoreIDs = await viewModel.loadUserFamilies()
+            firestoreIDs.append("00")
+            print(firestoreIDs)
         }
         .toolbar(.hidden)
         
