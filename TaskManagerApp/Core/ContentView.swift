@@ -52,6 +52,8 @@ final class ContentViewModel: ObservableObject {
               return []
           }
       }
+    
+    
 
 }
 
@@ -64,6 +66,21 @@ struct ContentView: View {
     @State private var firestoreIDs: [String] = ["00"] //get ids from firestore
     
     @StateObject private var viewModel = ContentViewModel()
+    
+    
+    func continuouslyRun() {
+        Task {
+                while true {
+                    // Your continuous code here
+                    firestoreIDs = await viewModel.loadUserFamilies()
+                    firestoreIDs.append("00")
+                    
+                    // Sleep for a short duration to prevent high CPU usage
+                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                }
+            }
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -82,6 +99,7 @@ struct ContentView: View {
                     
                     Button(action: {
                         newListModalOpen = true
+                        
                     }, label: {
                         Image(systemName: "pencil")
                             .resizable()
@@ -237,6 +255,8 @@ struct ContentView: View {
             try? await viewModel.loadCurrentUser()
             firestoreIDs = await viewModel.loadUserFamilies()
             firestoreIDs.append("00")
+           
+                
             print(firestoreIDs)
         }
         .toolbar(.hidden)
