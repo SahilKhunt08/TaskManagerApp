@@ -11,11 +11,54 @@
 //
 
 import SwiftUI
+import FirebaseCore
+import FirebaseFirestore
 
 @MainActor
 final class ContentViewModel: ObservableObject {
+    @Published var newListModalOpen = false
+    @Published var newFamilyModalOpen = false
+    @Published var addFamilyModalOpen = false
+    @Published var firestoreIDs: [String] = ["00"]
     
     @Published private(set) var user: DBUser? = nil
+    let db = Firestore.firestore()
+    
+    func getNewListModalOpen() -> Bool {
+        return newListModalOpen
+    }
+    
+    func setNewListModalOpen(_ value: Bool) {
+        newListModalOpen = value
+    }
+    
+    // Getter and Setter for newFamilyModalOpen
+    func getNewFamilyModalOpen() -> Bool {
+        return newFamilyModalOpen
+    }
+    
+    func setNewFamilyModalOpen(_ value: Bool) {
+        newFamilyModalOpen = value
+    }
+    
+    // Getter and Setter for addFamilyModalOpen
+    func getAddFamilyModalOpen() -> Bool {
+        return addFamilyModalOpen
+    }
+    
+    func setAddFamilyModalOpen(_ value: Bool) {
+        addFamilyModalOpen = value
+    }
+    
+    // Getter and Setter for firestoreIDs
+    func getFirestoreIDs() -> [String] {
+        return firestoreIDs
+    }
+    
+    func setFirestoreIDs(_ value: [String]) {
+        firestoreIDs = value
+    }
+    
     
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
@@ -30,16 +73,49 @@ final class ContentViewModel: ObservableObject {
             self.user = try await UserManager.shared.getUser(userId: user.userId)
         }
     }
+    
+    func loadUserFamilies() async -> [String] {
+        guard let user = user else {
+            print("User is not set")
+            return []
+        }
+        
+        let docRef = db.collection("users").document(user.userId)
+        
+        do {
+            let document = try await docRef.getDocument()
+            let families = document.get("families") as? [String] ?? []
+            return families
+        } catch {
+            print("Document does not exist or there was an error: \(error.localizedDescription)")
+            return []
+        }
+    }
+    
+    func continuouslyRun() {
+        Task {
+            while true {
+                // Your continuous code here
+                firestoreIDs = await loadUserFamilies()
+                firestoreIDs.append("00")
+                print("ran")
+                // Sleep for a short duration to prevent high CPU usage
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+            }
+        }
+    }
 }
+    
+    
+
+
+
+//everything related to back end might have to be pushed into the viewModal
 
 struct ContentView: View {
-    @State private var newListModalOpen = false
-    @State private var newFamilyModalOpen = false
-    @State private var addFamilyModalOpen = false
-    @Binding var showSignInView: Bool
-    private let firestoreIDs: [String] = ["00"] //get ids from firestore
-    
     @StateObject private var viewModel = ContentViewModel()
+    @Binding var showSignInView: Bool
+    
     
     var body: some View {
         NavigationView {
@@ -57,7 +133,8 @@ struct ContentView: View {
                     Spacer()
                     
                     Button(action: {
-                        newListModalOpen = true
+                        viewModel.setNewListModalOpen(true)
+                        
                     }, label: {
                         Image(systemName: "pencil")
                             .resizable()
@@ -66,8 +143,8 @@ struct ContentView: View {
                             .font(.system(size: 20))
                             .frame(width: 30, height: 30)
                             .bold()
-                    }).sheet(isPresented: $newListModalOpen, content: {
-                        NewListView(newListModalOpen: $newListModalOpen)
+                    }).sheet(isPresented: $viewModel.newListModalOpen, content: {
+                        NewListView(newListModalOpen: $viewModel.newListModalOpen)
                     })
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -93,32 +170,32 @@ struct ContentView: View {
                         Text("User is premium: \((user.isPremium ?? false).description.capitalized)")
                     }
                 }
-                Spacer()
-                Spacer()
                 
+                Spacer()
+                Spacer()
                 
                 VStack {
                     TabView {
-                        ForEach(firestoreIDs, id: \.self) { id in
+                        ForEach(viewModel.firestoreIDs, id: \.self) { id in
                             ZStack {
                                 Color.gray.opacity(0.2)
-                                if(id == "00") { //show new/join family UI
+                                if id == "00" { // show new/join family UI
                                     HStack {
                                         Button(action: {
-                                            newFamilyModalOpen = true
+                                            viewModel.newFamilyModalOpen = true
                                         }, label: {
                                             Text("NF")
                                                 .font(.title)
-                                                .foregroundColor(  .black)
+                                                .foregroundColor(.black)
                                                 .padding()
                                                 .background(Color.blue)
                                                 .cornerRadius(10)
-                                        }).sheet(isPresented: $newFamilyModalOpen, content: {
-                                            NewFamilyView(newFamilyModalOpen: $newFamilyModalOpen)
-                                        })
+                                        }).sheet(isPresented: $viewModel.newFamilyModalOpen) {
+                                            NewFamilyView(newFamilyModalOpen: $viewModel.newFamilyModalOpen)
+                                        }
                                         
                                         Button(action: {
-                                            addFamilyModalOpen = true
+                                            viewModel.addFamilyModalOpen = true
                                         }, label: {
                                             Text("JF")
                                                 .font(.title)
@@ -126,44 +203,106 @@ struct ContentView: View {
                                                 .padding()
                                                 .background(Color.blue)
                                                 .cornerRadius(10)
-                                        }).sheet(isPresented: $addFamilyModalOpen, content: {
-                                            AddFamilyView(addFamilyModalOpen: $addFamilyModalOpen)
-                                        })
-                                    }
-                                } else { //get firestore data and store in cards
-                                    Text(id)
-                                        .font(.title)
-                                        .foregroundColor(.black)
-                                        .padding()
-                                        .background(Color.white)
-                                        .cornerRadius(10)
-                                        .onAppear{
-                                            
+                                        }).sheet(isPresented: $viewModel.addFamilyModalOpen) {
+                                            AddFamilyView(addFamilyModalOpen: $viewModel.addFamilyModalOpen)
                                         }
+                                    }
+                                } else { // get firestore data and store in cards
+                                    ScrollView {
+                                        Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
+                                            GridRow {
+                                                ForEach(0..<2) { _ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text(id)
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                    
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) { _ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text(id)
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) { _ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text(id)
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) { _ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text(id)
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                }
+                                            }
+                                            GridRow {
+                                                ForEach(0..<2) { _ in
+                                                    Rectangle()
+                                                        .fill(Color.blue)
+                                                        .frame(height: 170)
+                                                        .overlay(
+                                                            Text(id)
+                                                                .font(.largeTitle)
+                                                                .foregroundColor(.white)
+                                                        )
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                            
                         }
                     }
                     .tabViewStyle(.page)
                     .indexViewStyle(.page(backgroundDisplayMode: .interactive))
                     .cornerRadius(30)
                 }
+                
+                
             }
+            
             .padding()
         }
-        .task() {
+        
+        .task {
             try? await viewModel.loadCurrentUser()
-            print("Opened ContentView")
+            viewModel.continuouslyRun()
+            print(viewModel.getFirestoreIDs())
         }
         .toolbar(.hidden)
         
     }
 }
+                                   
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(showSignInView: .constant(false))
     }
 }
+
 
