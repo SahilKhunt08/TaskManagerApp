@@ -104,13 +104,11 @@ final class ContentViewModel: ObservableObject {
             }
         }
     }
+    
+    func getListGrid() {
+        
+    }
 }
-    
-    
-
-
-
-//everything related to back end might have to be pushed into the viewModal
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
@@ -208,9 +206,12 @@ struct ContentView: View {
                                         }
                                     }
                                 } else { // get firestore data and store in cards
+                                    
                                     ScrollView {
                                         Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
+                                            
                                             GridRow {
+                                                
                                                 ForEach(0..<2) { _ in
                                                     Rectangle()
                                                         .fill(Color.blue)
@@ -272,6 +273,10 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
+                                    }.onAppear() {
+                                        //call viewModel Function
+                                        viewModel.getListGrid()
+                                        
                                     }
                                 }
                             }
