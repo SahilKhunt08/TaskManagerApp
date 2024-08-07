@@ -20,6 +20,7 @@ final class ContentViewModel: ObservableObject {
     @Published var newFamilyModalOpen = false
     @Published var addFamilyModalOpen = false
     @Published var firestoreIDs: [String] = ["00"]
+    @Published var currFamilyName = ""
     
     @Published private(set) var user: DBUser? = nil
     let db = Firestore.firestore()
@@ -59,10 +60,13 @@ final class ContentViewModel: ObservableObject {
         firestoreIDs = value
     }
     
-    
     func loadCurrentUser() async throws {
         let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
         self.user = try await UserManager.shared.getUser(userId: authDataResult.uid)
+    }
+    
+    func setCurrFamilyName(_ value: String) {
+        currFamilyName = value
     }
     
     func togglePremmiumStatus() {
@@ -79,9 +83,7 @@ final class ContentViewModel: ObservableObject {
             print("User is not set")
             return []
         }
-        
         let docRef = db.collection("users").document(user.userId)
-        
         do {
             let document = try await docRef.getDocument()
             let families = document.get("families") as? [String] ?? []
@@ -105,15 +107,31 @@ final class ContentViewModel: ObservableObject {
         }
     }
     
-    func getListGrid() {
-        
+    func getListGrid(familyName: String) {
+        setCurrFamilyName(familyName)
+        print(familyName)
+        let listsRef = db.collection("families").document(familyName).collection("lists")
+        listsRef.getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error.localizedDescription)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+        //get all lists in that family
+        //get dimensions of the grid
     }
 }
+
+
+
+
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
     @Binding var showSignInView: Bool
-    
     
     var body: some View {
         NavigationView {
@@ -132,7 +150,6 @@ struct ContentView: View {
                     
                     Button(action: {
                         viewModel.setNewListModalOpen(true)
-                        
                     }, label: {
                         Image(systemName: "pencil")
                             .resizable()
@@ -146,12 +163,10 @@ struct ContentView: View {
                     })
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                
-                Text("List Name")
+                Text("\(viewModel.currFamilyName)")
                     .bold()
                     .font(.largeTitle)
                     .frame(alignment: .leading)
-                
                 HStack { // Temp...will change
                     ForEach(0..<5) { _ in
                         Image(systemName: "person.crop.circle")
@@ -191,7 +206,6 @@ struct ContentView: View {
                                         }).sheet(isPresented: $viewModel.newFamilyModalOpen) {
                                             NewFamilyView(newFamilyModalOpen: $viewModel.newFamilyModalOpen)
                                         }
-                                        
                                         Button(action: {
                                             viewModel.addFamilyModalOpen = true
                                         }, label: {
@@ -205,13 +219,10 @@ struct ContentView: View {
                                             AddFamilyView(addFamilyModalOpen: $viewModel.addFamilyModalOpen)
                                         }
                                     }
-                                } else { // get firestore data and store in cards
-                                    
+                                } else {
                                     ScrollView {
                                         Grid(alignment: .center, horizontalSpacing: 10, verticalSpacing: 10) {
-                                            
                                             GridRow {
-                                                
                                                 ForEach(0..<2) { _ in
                                                     Rectangle()
                                                         .fill(Color.blue)
@@ -221,7 +232,6 @@ struct ContentView: View {
                                                                 .font(.largeTitle)
                                                                 .foregroundColor(.white)
                                                         )
-                                                    
                                                 }
                                             }
                                             GridRow {
@@ -273,11 +283,17 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
+                                        
+                                    //Vedant
                                     }.onAppear() {
                                         //call viewModel Function
-                                        viewModel.getListGrid()
+                                        
+                                        viewModel.getListGrid(familyName: id)
+                                        
                                         
                                     }
+                                    //
+                                    
                                 }
                             }
                         }
@@ -286,24 +302,16 @@ struct ContentView: View {
                     .indexViewStyle(.page(backgroundDisplayMode: .interactive))
                     .cornerRadius(30)
                 }
-                
-                
             }
-            
             .padding()
-        }
-        
-        .task {
+        }.task {
             try? await viewModel.loadCurrentUser()
             viewModel.continuouslyRun()
             print(viewModel.getFirestoreIDs())
-        }
-        .toolbar(.hidden)
-        
+        }.toolbar(.hidden)
     }
 }
                                    
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(showSignInView: .constant(false))
